@@ -4,15 +4,15 @@
 
 1. **Deletar imagens antigas**
     ```bash
-        docker rmi spring3-cassandra:0.1.0
+        docker rmi spring3-cassandra:0.1.1
     ``` 
 2. **Build do projeto**
     ```bash
-   docker build -t spring3-cassandra:0.1.0 -f docker/Dockerfile .   
+   docker build -t spring3-cassandra:0.1.1 -f docker/Dockerfile .   
    ``` 
 3. **Tag do build**
    ```bash
-        docker tag 750aa7f6a5f4 lucasgalo/spring3-cassandra:0.1.0
+        docker tag a591977c0836 lucasgalo/spring3-cassandra:0.1.1
    ```
 4. **Login dockerhub**
    ```bash
@@ -20,5 +20,5 @@
    ```
 5. **Push da tag**
     ```bash
-        docker push lucasgalo/spring3-cassandra:0.1.0
+        docker push lucasgalo/spring3-cassandra:0.1.1
     ```

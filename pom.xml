@@ -10,7 +10,7 @@
     </parent>
     <groupId>com.galo</groupId>
     <artifactId>spring3-cassandra</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
+    <version>0.1.1</version>
     <name>spring3-cassandra</name>
     <description>spring3-cassandra</description>
     <url/>
