@@ -62,22 +62,36 @@
             <scope>test</scope>
         </dependency>
 
-        <!--        openZipkin -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-zipkin</artifactId>
+            <artifactId>spring-boot-starter-actuator</artifactId>
         </dependency>
 
+        <!-- Micrometer Tracing API -->
         <dependency>
-            <groupId>io.zipkin.reporter2</groupId>
-            <artifactId>zipkin-reporter-brave</artifactId>
+            <groupId>io.micrometer</groupId>
+            <artifactId>micrometer-tracing</artifactId>
         </dependency>
+
+        <!-- Bridge Brave (implementação do tracer) -->
         <dependency>
             <groupId>io.micrometer</groupId>
             <artifactId>micrometer-tracing-bridge-brave</artifactId>
         </dependency>
 
-<!-- Swagger UI -->
+        <!-- Reporter Zipkin para Brave -->
+        <dependency>
+            <groupId>io.zipkin.reporter2</groupId>
+            <artifactId>zipkin-reporter-brave</artifactId>
+        </dependency>
+
+        <!-- Sender para enviar spans via HTTP (se não houver RestTemplate/WebClient) -->
+        <dependency>
+        <groupId>io.zipkin.reporter2</groupId>
+        <artifactId>zipkin-sender-urlconnection</artifactId>
+        </dependency>
+
+        <!-- Swagger UI -->
         <dependency>
             <groupId>org.springdoc</groupId>
             <artifactId>springdoc-openapi-starter-webmvc-ui</artifactId>
