@@ -6,7 +6,7 @@ spring:
     contact-points: ${SPRING_CASSANDRA_CONTACT_POINTS:cassandralocal}
     port: ${SPRING_CASSANDRA_PORT:9042}
     local-datacenter: datacenter1
-#    keyspace-name: mykeyspace   # optional
+    keyspace-name: mykeyspace   # optional
 
 # ===============================
 # = ACTUATOR
