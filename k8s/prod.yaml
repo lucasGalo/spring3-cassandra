@@ -1,0 +1,41 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: spring3-cassandra
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: spring3-cassandra
+  template:
+    metadata:
+      labels:
+        app: spring3-cassandra
+    spec:
+      containers:
+        - name: spring3-cassandra
+          image: lucasgalo/spring3-cassandra:0.1.0   # substitua pela sua imagem
+          ports:
+            - containerPort: 8080
+          env:
+           - name: SPRING_CASSANDRA_CONTACT_POINTS
+             value: "cassandra"                # nome do Service Cassandra
+           - name: SPRING_CASSANDRA_PORT
+             value: "9042"                    # porta do Cassandra
+           - name: URL_OPENZIPKIN
+             value: "http://zipkin:9411/api/v2/spans"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: spring3-cassandra
+spec:
+  type: NodePort
+  selector:
+    app: spring3-cassandra
+  ports:
+    - port: 8080        # porta interna do pod
+      targetPort: 8080  # porta do container
+      nodePort: 30085   # porta externa válida (faixa 30000–32767)
+      protocol: TCP
+      name: http

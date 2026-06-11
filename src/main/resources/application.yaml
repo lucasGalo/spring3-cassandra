@@ -1,0 +1,41 @@
+spring:
+  application:
+    name: spring3-cassandra
+
+  data:
+    cassandra:
+      contact-points: ${SPRING_CASSANDRA_CONTACT_POINTS:cassandralocal}       # Endereço do Cassandra (pode ser um IP ou hostname)
+      port: 9042
+      keyspace-name: mykeyspace
+      local-datacenter: datacenter1                     # Nome do datacenter configurado no Cassandra
+      schema-action: create_if_not_exists                 # Cria tabelas se não existirem (dev/teste)
+      request:
+        timeout: 10s                                     # Timeout de requisição
+      connection:
+        connect-timeout: 10s                             # Timeout de conexão
+        init-query-timeout: 5s                           # Timeout da query inicial
+
+# ===============================
+# = ACTUATOR
+# ===============================
+management:
+  endpoints:
+    web:
+      exposure:
+        include: [ "prometheus" ]
+  metrics:
+    tags:
+      application: ${spring.application.name}
+    export:
+      prometheus:
+        enabled: true
+
+  # ===============================
+  # = OPENZIPKIN
+  # ===============================
+  tracing:
+    sampling:
+      probability: 0.2   # 20% das requisições; em produção use valores menores
+    export:
+      zipkin:
+        endpoint: ${URL_OPENZIPKIN:http://192.168.0.100:9411/api/v2/spans}
