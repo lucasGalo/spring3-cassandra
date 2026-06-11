@@ -9,6 +9,8 @@ import org.springframework.web.client.RestTemplate;
 @Component
 public class HealthCheckScheduler {
 
+  static int count;
+
   private static final Logger logger = LoggerFactory.getLogger(HealthCheckScheduler.class);
   public static final String URL = "http://localhost:8080/books";
   private final RestTemplate restTemplate = new RestTemplate();
@@ -26,12 +28,12 @@ public class HealthCheckScheduler {
   @Scheduled(fixedRate = 15000) // a cada 15 segundos
   public void checkOtherAppHealth() {
     try {
-      Book book = new Book(null, "", "");
+      Book book = new Book(null, "Titulo "+ count++, "Autor "+ count);
       Book response = restTemplate.postForObject(URL, book, Book.class);
 
       logger.info("create book: {}", response);
 
-      restTemplate.delete(URL, book);
+      restTemplate.delete(URL+"/"+book.getId());
 
       logger.info("Deleted book {}", book);
     } catch (Exception e) {
