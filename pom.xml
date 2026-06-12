@@ -10,7 +10,7 @@
     </parent>
     <groupId>com.galo</groupId>
     <artifactId>spring3-cassandra</artifactId>
-    <version>0.1.5</version>
+    <version>0.1.6</version>
     <name>spring3-cassandra</name>
     <description>spring3-cassandra</description>
     <url/>
@@ -90,13 +90,12 @@
         <groupId>io.zipkin.reporter2</groupId>
         <artifactId>zipkin-sender-urlconnection</artifactId>
         </dependency>
-
-        <dependency>
-            <groupId>com.github.loki4j</groupId>
-            <artifactId>loki-logback-appender</artifactId>
-            <version>1.5.1</version>
-        </dependency>
-
+<!--Loki4j Appender-->
+<!--        <dependency>-->
+<!--            <groupId>com.github.loki4j</groupId>-->
+<!--            <artifactId>loki-logback-appender</artifactId>-->
+<!--            <version>1.4.1</version>-->
+<!--        </dependency>-->
         <!-- Swagger UI -->
         <dependency>
             <groupId>org.springdoc</groupId>

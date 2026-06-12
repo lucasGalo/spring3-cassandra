@@ -26,13 +26,6 @@ management:
   # ===============================
   # = OPENZIPKIN
   # ===============================
-#  tracing:
-#    sampling:
-#      probability: 0.2   # 20% das requisições; em produção use valores menores
-#    export:
-#      zipkin:
-#        endpoint: ${URL_OPENZIPKIN:http://192.168.0.100:9411/api/v2/spans}
-
   tracing:
     enabled: true
     sampling:
