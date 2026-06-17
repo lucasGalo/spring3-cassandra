@@ -33,3 +33,7 @@ management:
   zipkin:
     tracing:
       endpoint: ${URL_OPENZIPKIN:http://192.168.0.100:9411/api/v2/spans}
+
+apps:
+  api-teste:
+    url: ${URL_API_TESTE:http://localhost:8383}
