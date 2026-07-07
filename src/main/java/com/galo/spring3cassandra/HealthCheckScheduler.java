@@ -12,7 +12,7 @@ public class HealthCheckScheduler {
   static int count;
 
   private static final Logger logger = LoggerFactory.getLogger(HealthCheckScheduler.class);
-  public static final String URL = "http://localhost:8080/books";
+  public static final String URL = "http://localhost:8089/books";
   private final RestTemplate restTemplate = new RestTemplate();
 
   @Scheduled(fixedRate = 10000) // a cada 10 segundos
