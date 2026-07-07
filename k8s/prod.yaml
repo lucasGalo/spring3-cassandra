@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: spring3-cassandra
-          image: lucasgalo/spring3-cassandra:0.1.7   # substitua pela sua imagem
+          image: lucasgalo/spring3-cassandra:0.1.8   # substitua pela sua imagem
           ports:
             - containerPort: 8080
           env:
@@ -26,6 +26,8 @@ spec:
              value: "http://zipkin:9411/api/v2/spans"
            - name: URL_API_TESTE
              value: "http://api-teste:8383"
+           - name: URL_GATEWAY
+             value: "http://spring3-cloud-gateway:8080"
 ---
 apiVersion: v1
 kind: Service

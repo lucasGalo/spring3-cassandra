@@ -1,11 +1,17 @@
 package com.galo.spring3cassandra;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.http.*;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
+import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.RestTemplate;
+
+import java.util.HashMap;
+import java.util.Map;
 
 @Component
 public class ApiTesteScheduler {
@@ -14,13 +20,14 @@ public class ApiTesteScheduler {
 
   private static final Logger logger = LoggerFactory.getLogger(ApiTesteScheduler.class);
   @Value("${apps.api-teste.url}")
-  public String URL ;
+  public String URL;
+
   private final RestTemplate restTemplate = new RestTemplate();
 
   @Scheduled(fixedRate = 10000) // a cada 10 segundos
   public void getAllUser() {
     try {
-      String response = restTemplate.getForObject(URL+"/users", String.class);
+      String response = restTemplate.getForObject(URL + "/users", String.class);
       logger.info("api teste get: {}", response);
     } catch (Exception e) {
       logger.error("Erro ao chamar /all users: {}", e.getMessage());
@@ -30,11 +37,11 @@ public class ApiTesteScheduler {
   @Scheduled(fixedRate = 15000) // a cada 15 segundos
   public void checkOtherAppHealth() {
     try {
-      String response = restTemplate.postForObject(URL+"/users", "Nome", String.class);
+      String response = restTemplate.postForObject(URL + "/users", "Nome", String.class);
 
       logger.info("create user: {}", response);
 
-      restTemplate.delete(URL+"/users/"+response.split(":")[1]);
+      restTemplate.delete(URL + "/users/" + response.split(":")[1]);
 
       logger.info("Deleted user {}", response);
     } catch (Exception e) {
@@ -60,5 +67,4 @@ public class ApiTesteScheduler {
       logger.error("Erro ao limpar base: {}", e.getMessage());
     }
   }
-
 }

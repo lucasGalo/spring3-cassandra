@@ -2,8 +2,11 @@ spring:
   application:
     name: spring3-cassandra
 
+# ===============================
+# = DATABASE CASSANDRA
+# ===============================
   cassandra:
-    contact-points: ${SPRING_CASSANDRA_CONTACT_POINTS:cassandralocal}
+    contact-points: ${SPRING_CASSANDRA_CONTACT_POINTS:localhost}
     port: ${SPRING_CASSANDRA_PORT:9042}
     local-datacenter: datacenter1
     keyspace-name: mykeyspace   # optional
@@ -23,9 +26,9 @@ management:
       prometheus:
         enabled: true
 
-  # ===============================
-  # = OPENZIPKIN
-  # ===============================
+# ===============================
+# = OPENZIPKIN
+# ===============================
   tracing:
     enabled: true
     sampling:
@@ -34,6 +37,22 @@ management:
     tracing:
       endpoint: ${URL_OPENZIPKIN:http://192.168.0.100:9411/api/v2/spans}
 
+  logging:
+    pattern:
+      correlation: "[${spring.application.name:},%X{traceId:-},%X{spanId:-}] "
+    include-application-name: false
+
+# ===============================
+# Clients externos (e.g., API de teste)
+# ===============================
 apps:
   api-teste:
     url: ${URL_API_TESTE:http://localhost:8383}
+  gateway:
+    url: ${URL_GATEWAY:http://localhost:8080}
+
+# ===============================
+# = SERVICE
+# ===============================
+server:
+  port: 8089
